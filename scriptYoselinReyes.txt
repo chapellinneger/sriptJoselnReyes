@@ -3,17 +3,28 @@ var dat_input = formulario[0].getElementsByTagName('label');
 var resultado = [];
 var data_type = '';
 for(var i=0; i<dat_input.length; i++){
-    var datos_option = dat_input[i].control.tagName +"[id='"+dat_input[i].control.id+"']";
+    var datos_option_text = dat_input[i].control.tagName +"[id='"+dat_input[i].control.id+"']";
     if(dat_input[i].control.type == 'checkbox'){
 	data_type = 'CHECKBOX';
     }else{
 	data_type = dat_input[i].control.tagName;
     }
+    var datos_option = [];
+    if(dat_input[i].control.children.length > 1){
+	for( var j=0; j< dat_input[i].control.children.length; j++){
+		var res_option = {
+			'option':dat_input[i].control.children[j].textContent,
+			'value':dat_input[i].control.children[j].value
+		}
+                datos_option.push(res_option);
+    	}
+    }
+    
     var lista_aux = {
 		'label': dat_input[i].lastChild.data,
                 'Type':data_type,
-                'Selector':datos_option,
-                'Options':dat_input[i].control.children
+                'Selector':datos_option_text,
+                'Options':datos_option
     }
 	resultado.push(lista_aux);
 }
