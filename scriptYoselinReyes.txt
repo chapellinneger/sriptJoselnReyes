@@ -1,0 +1,21 @@
+var formulario = document.getElementsByClassName('pbBody');
+var dat_input = formulario[0].getElementsByTagName('label');
+var resultado = [];
+var data_type = '';
+for(var i=0; i<dat_input.length; i++){
+    var datos_option = dat_input[i].control.tagName +"[id='"+dat_input[i].control.id+"']";
+    if(dat_input[i].control.type == 'checkbox'){
+	data_type = 'CHECKBOX';
+    }else{
+	data_type = dat_input[i].control.tagName;
+    }
+    var lista_aux = {
+		'label': dat_input[i].lastChild.data,
+                'Type':data_type,
+                'Selector':datos_option,
+                'Options':dat_input[i].control.children
+    }
+	resultado.push(lista_aux);
+}
+console.log(resultado);
+//return resultado;
